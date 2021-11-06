@@ -1,8 +1,10 @@
+var bird;
 function setup() {
-  createCanvas(400, 400);
-  // background("#f2f2d8");
+  createCanvas(400, 600);
+  bird = new Bird();
 }
 
 function draw() {
-  background("#d2d9f8");
+  background(0);
+  bird.show();
 }
