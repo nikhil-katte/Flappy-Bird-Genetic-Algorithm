@@ -2,23 +2,29 @@ class Matrix {
   constructor(rows, cols) {
     this.rows = rows;
     this.cols = cols;
-    this.matrix = [];
+    this.data = [];
     for (let i = 0; i < this.rows; i++) {
-      this.matrix[i] = [];
+      this.data[i] = [];
       for (let j = 0; j < this.cols; j++) {
-        this.matrix[i][j] = 0;
+        this.data[i][j] = 0;
       }
     }
   }
 
-  // transpose() {
-  //   let result=new
-  // }
+  transpose() {
+    let result = new Matrix(this.cols, this.rows);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        result.matrix[j][i] = this.data[i][j];
+      }
+    }
+    return result;
+  }
 
   randomize() {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        this.matrix[i][j] = Math.floor(Math.random() * 10);
+        this.data[i][j] = Math.floor(Math.random() * 10);
       }
     }
   }
@@ -27,13 +33,13 @@ class Matrix {
     if (n instanceof Matrix) {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
-          this.matrix[i][j] += n.matrix[i][j];
+          this.data[i][j] += n.matrix[i][j];
         }
       }
     } else {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
-          this.matrix[i][j] += n;
+          this.data[i][j] += n;
         }
       }
     }
@@ -62,14 +68,14 @@ class Matrix {
 
       // for (let i = 0; i < this.rows; i++) {
       //   for (let j = 0; j < this.cols; j++) {
-      //     this.matrix[i][j] *= n.matrix[i][j];
+      //     this.data[i][j] *= n.matrix[i][j];
       //   }
       // }
       return result;
     } else {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
-          this.matrix[i][j] *= n;
+          this.data[i][j] *= n;
         }
       }
     }
