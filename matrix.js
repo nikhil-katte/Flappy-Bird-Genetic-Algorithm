@@ -17,6 +17,7 @@ class Matrix {
     for (let i = 0; i < arr.length; i++) {
       m.data[i][0] = arr[i];
     }
+    // console.log("fromarray");
     // m.print();
     return m;
   }
@@ -25,16 +26,16 @@ class Matrix {
     let arr = [];
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        arr.push(this.data[j][i]);
+        arr.push(this.data[i][j]);
       }
     }
     return arr;
   }
-  transpose() {
-    let result = new Matrix(this.cols, this.rows);
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-        result.data[j][i] = this.data[i][j];
+  static transpose(matrix) {
+    let result = new Matrix(matrix.cols, matrix.rows);
+    for (let i = 0; i < matrix.rows; i++) {
+      for (let j = 0; j < matrix.cols; j++) {
+        result.data[j][i] = matrix.data[i][j];
       }
     }
     return result;
@@ -46,6 +47,16 @@ class Matrix {
         this.data[i][j] = Math.random() * 2 - 1;
       }
     }
+  }
+
+  static subtract(a, b) {
+    let result = new Matrix(a.rows, a.cols);
+    for (let i = 0; i < result.rows; i++) {
+      for (let j = 0; j < result.cols; j++) {
+        result.data[i][j] = a.data[i][j] - b.data[i][j];
+      }
+    }
+    return result;
   }
 
   add(n) {
@@ -69,7 +80,7 @@ class Matrix {
       console.log(
         "Number of Columns and Rows of A must match Columns and Rows of B."
       );
-      return;
+      return undefined;
     }
     let result = new Matrix(a.rows, b.cols);
 
@@ -88,6 +99,12 @@ class Matrix {
 
   multiply(n) {
     if (n instanceof Matrix) {
+      // hadamard product
+      for (let i = 0; i < this.rows; i++) {
+        for (let j = 0; j < this.cols; j++) {
+          this.data[i][j] *= n.data[i][j];
+        }
+      }
     } else {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
@@ -99,6 +116,18 @@ class Matrix {
 
   print() {
     console.table(this.data);
+  }
+
+  static map(matrix, func) {
+    // Apply a function to every element of matrix
+    let results = new Matrix(matrix.rows, matrix.cols);
+    for (let i = 0; i < matrix.rows; i++) {
+      for (let j = 0; j < matrix.cols; j++) {
+        let val = matrix.data[i][j];
+        results.data[i][j] = func(val);
+      }
+    }
+    return results;
   }
   map(func) {
     //apply a funtion to every element of matrix
