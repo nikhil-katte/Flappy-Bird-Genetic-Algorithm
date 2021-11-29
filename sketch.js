@@ -5,14 +5,10 @@ function setup() {
   bird = new Bird();
   pipes.push(new Pipe());
 
-  let a = new Matrix(2, 2);
-  a.randomize();
-  a.print();
-  function double(x) {
-    return x * 2;
-  }
-  a.map(double);
-  a.print();
+  let nn = new NeuralNetwork(2, 2, 1);
+  let input = [1, 0];
+  let output = nn.feedforward(input);
+  console.log(output);
 }
 
 function draw() {
