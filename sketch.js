@@ -37,11 +37,11 @@ function setup() {
 
   // nn.train(inputs, targets);
 
-  brain = new NeuralNetwork(2, 4, 1);
-  console.log(brain);
-  let child = brain.copy();
-  child.mutate(0.01);
-  console.log(child);
+  // brain = new NeuralNetwork(2, 4, 1);
+  // console.log(brain);
+  // let child = brain.copy();
+  // child.mutate(0.01);
+  // console.log(child);
 }
 
 function draw() {
@@ -60,12 +60,13 @@ function draw() {
   if (frameCount % 80 == 0) {
     pipes.push(new Pipe());
   }
+  bird.think(pipes);
   bird.update();
   bird.show();
 }
 
-function keyPressed() {
-  if (key == " ") {
-    bird.up();
-  }
-}
+// function keyPressed() {
+//   if (key == " ") {
+//     bird.up();
+//   }
+// }

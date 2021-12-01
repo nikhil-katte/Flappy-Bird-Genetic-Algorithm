@@ -54,7 +54,7 @@ class NeuralNetwork {
     this.activation_function = func;
   }
 
-  feedforward(intput_array) {
+  predict(intput_array) {
     //generating hidden outputs
     let inputs = Matrix.fromArray(intput_array);
 
