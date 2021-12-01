@@ -10,7 +10,15 @@ class Matrix {
       }
     }
   }
-
+  copy() {
+    let m = new Matrix(this.rows, this.cols);
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        m.data[i][j] = this.data[i][j];
+      }
+    }
+    return m;
+  }
   static fromArray(arr) {
     let m = new Matrix(arr.length, 1);
 
